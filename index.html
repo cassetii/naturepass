@@ -27,7 +27,130 @@
             line-height: 1.6;
         }
 
-        /* Mobile First Design */
+        /* Login Page Styles */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .login-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .login-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .login-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(126, 162, 48, 0.25);
+            outline: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(51, 77, 43, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff40;
+            border-top: 2px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Main App Styles */
         .mobile-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
             color: white;
@@ -38,11 +161,38 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
         .mobile-header h1 {
             font-size: 1.25rem;
             margin: 0;
-            text-align: center;
             font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .mobile-container {
@@ -299,29 +449,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 576px) {
-            .mobile-card {
-                margin: 0.25rem;
-                border-radius: 12px;
-            }
-            
-            .mobile-form-section {
-                padding: 1rem;
-            }
-            
-            .mobile-total-display {
-                font-size: 1.25rem;
-                padding: 1.25rem;
-            }
-        }
-
         /* Hide content sections */
         .content-section {
             display: none;
         }
 
         .content-section.active {
+            display: block;
+        }
+
+        /* Page sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
             display: block;
         }
 
@@ -348,16 +490,26 @@
             box-shadow: 0 8px 25px rgba(126, 162, 48, 0.6);
         }
 
-        /* Price tags */
-        .price-tag {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-left: 0.5rem;
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .mobile-card {
+                margin: 0.25rem;
+                border-radius: 12px;
+            }
+            
+            .mobile-form-section {
+                padding: 1rem;
+            }
+            
+            .mobile-total-display {
+                font-size: 1.25rem;
+                padding: 1.25rem;
+            }
+
+            .login-card {
+                margin: 0.5rem;
+                padding: 1.5rem;
+            }
         }
 
         @keyframes pulse {
@@ -373,118 +525,172 @@
     </style>
 </head>
 <body>
-    <!-- Mobile Header -->
-    <div class="mobile-header">
-        <h1>
-            <i class="fas fa-mountain me-2"></i>
-            Registrasi Kawasan Hutan Pinuslo
-        </h1>
-    </div>
-
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav">
-        <div class="mobile-nav-item active" onclick="showSection('form')">
-            <i class="fas fa-edit me-1"></i>Form
-        </div>
-        <div class="mobile-nav-item" onclick="showSection('data')">
-            <i class="fas fa-list me-1"></i>Data
-        </div>
-    </div>
-
-    <div class="mobile-container">
-        <!-- Form Section -->
-        <div id="formSection" class="content-section active">
-            <div class="mobile-card">
-                <div class="mobile-card-header">
-                    <i class="fas fa-user-edit me-2"></i>Form Registrasi Baru
+    <!-- Login Page -->
+    <div id="loginPage" class="page-section active">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-logo">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <h2 class="login-title">Hutan Pinuslo</h2>
+                    <p class="login-subtitle">Sistem Registrasi Kawasan</p>
                 </div>
-                <div class="mobile-form-section">
-                    <form id="registrationForm">
-                        <div class="mobile-form-group">
-                            <label class="mobile-label">
-                                <i class="fas fa-user me-2"></i>Nama Petugas Loket
-                            </label>
-                            <input type="text" class="mobile-input" id="petugasLoket" placeholder="Masukkan nama petugas" required>
-                        </div>
 
-                        <div class="mobile-form-group">
-                            <label class="mobile-label">
-                                <i class="fas fa-calendar me-2"></i>Tanggal Kunjungan
-                            </label>
-                            <input type="date" class="mobile-input" id="tanggal" required>
-                        </div>
+                <form id="loginForm">
+                    <div class="login-form-group">
+                        <label class="login-label">
+                            <i class="fas fa-user me-2"></i>Username
+                        </label>
+                        <input type="text" class="login-input" id="username" placeholder="Masukkan username" required>
+                    </div>
 
-                        <div class="mobile-form-group">
-                            <label class="mobile-label">
-                                <i class="fas fa-users me-2"></i>Jumlah Pengunjung
-                            </label>
-                            <input type="number" class="mobile-input" id="jumlahOrang" min="1" placeholder="1" value="1" required>
-                        </div>
+                    <div class="login-form-group">
+                        <label class="login-label">
+                            <i class="fas fa-lock me-2"></i>Password
+                        </label>
+                        <input type="password" class="login-input" id="password" placeholder="Masukkan password" required>
+                    </div>
 
-                        <div class="mobile-form-group">
-                            <label class="mobile-label">
-                                <i class="fas fa-list me-2"></i>Pilih Paket Kunjungan
-                            </label>
-                            <select class="mobile-select" id="jenisKunjungan" required>
-                                <option value="">-- Pilih Paket --</option>
-                                <option value="cafe" data-price="10000">☕ Kunjungan Cafe</option>
-                                <option value="weekday" data-price="15000">🏠 Menginap Weekday</option>
-                                <option value="weekend" data-price="20000">🌅 Menginap Weekend</option>
-                                <option value="hiking" data-price="50000">🥾 Paket Hiking</option>
-                            </select>
+                    <button type="submit" class="login-btn" id="loginButton">
+                        <span id="loginText">
+                            <i class="fas fa-sign-in-alt me-2"></i>Masuk
+                        </span>
+                        <div class="login-loading" id="loginLoading">
+                            <div class="login-spinner"></div>
+                            <span>Memverifikasi...</span>
                         </div>
+                    </button>
+                </form>
 
-                        <div class="mobile-ticket-display">
-                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Nomor Tiket</div>
-                            <div id="ticketDisplay" style="font-size: 1.2rem;">-</div>
-                        </div>
+                <div id="loginAlert"></div>
+            </div>
+        </div>
+    </div>
 
-                        <div class="mobile-total-display">
-                            <i class="fas fa-money-bill-wave me-2"></i>
-                            <div>Total Pembayaran</div>
-                            <div style="font-size: 2rem; margin-top: 0.5rem;">
-                                Rp <span id="totalAmount">0</span>
+    <!-- Main App -->
+    <div id="mainApp" class="page-section">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <div class="mobile-header-content">
+                <h1>
+                    <i class="fas fa-mountain me-2"></i>
+                    Registrasi Pinuslo
+                </h1>
+                <div class="user-info">
+                    <span id="currentUser">Admin</span>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav">
+            <div class="mobile-nav-item active" onclick="showSection('form')">
+                <i class="fas fa-edit me-1"></i>Form
+            </div>
+            <div class="mobile-nav-item" onclick="showSection('data')">
+                <i class="fas fa-list me-1"></i>Data
+            </div>
+        </div>
+
+        <div class="mobile-container">
+            <!-- Form Section -->
+            <div id="formSection" class="content-section active">
+                <div class="mobile-card">
+                    <div class="mobile-card-header">
+                        <i class="fas fa-user-edit me-2"></i>Form Registrasi Baru
+                    </div>
+                    <div class="mobile-form-section">
+                        <form id="registrationForm">
+                            <div class="mobile-form-group">
+                                <label class="mobile-label">
+                                    <i class="fas fa-user me-2"></i>Nama Petugas Loket
+                                </label>
+                                <input type="text" class="mobile-input" id="petugasLoket" placeholder="Masukkan nama petugas" required>
                             </div>
+
+                            <div class="mobile-form-group">
+                                <label class="mobile-label">
+                                    <i class="fas fa-calendar me-2"></i>Tanggal Kunjungan
+                                </label>
+                                <input type="date" class="mobile-input" id="tanggal" required>
+                            </div>
+
+                            <div class="mobile-form-group">
+                                <label class="mobile-label">
+                                    <i class="fas fa-users me-2"></i>Jumlah Pengunjung
+                                </label>
+                                <input type="number" class="mobile-input" id="jumlahOrang" min="1" placeholder="1" value="1" required>
+                            </div>
+
+                            <div class="mobile-form-group">
+                                <label class="mobile-label">
+                                    <i class="fas fa-list me-2"></i>Pilih Paket Kunjungan
+                                </label>
+                                <select class="mobile-select" id="jenisKunjungan" required>
+                                    <option value="">-- Pilih Paket --</option>
+                                    <option value="cafe" data-price="10000">☕ Kunjungan Cafe</option>
+                                    <option value="weekday" data-price="15000">🏠 Menginap Weekday</option>
+                                    <option value="weekend" data-price="20000">🌅 Menginap Weekend</option>
+                                    <option value="hiking" data-price="50000">🥾 Paket Hiking</option>
+                                </select>
+                            </div>
+
+                            <div class="mobile-ticket-display">
+                                <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Nomor Tiket</div>
+                                <div id="ticketDisplay" style="font-size: 1.2rem;">-</div>
+                            </div>
+
+                            <div class="mobile-total-display">
+                                <i class="fas fa-money-bill-wave me-2"></i>
+                                <div>Total Pembayaran</div>
+                                <div style="font-size: 2rem; margin-top: 0.5rem;">
+                                    Rp <span id="totalAmount">0</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="mobile-btn mobile-btn-primary">
+                                <i class="fas fa-save me-2"></i>Simpan Registrasi
+                            </button>
+                            
+                            <button type="button" class="mobile-btn mobile-btn-secondary" onclick="loadData()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                            </button>
+                        </form>
+
+                        <div class="mobile-loading" id="loading">
+                            <div class="mobile-spinner"></div>
+                            <p>Menyimpan data registrasi...</p>
                         </div>
+                    </div>
+                </div>
+            </div>
 
-                        <button type="submit" class="mobile-btn mobile-btn-primary">
-                            <i class="fas fa-save me-2"></i>Simpan Registrasi
-                        </button>
-                        
-                        <button type="button" class="mobile-btn mobile-btn-secondary" onclick="loadData()">
-                            <i class="fas fa-sync-alt me-2"></i>Refresh Data
-                        </button>
-                    </form>
-
-                    <div class="mobile-loading" id="loading">
-                        <div class="mobile-spinner"></div>
-                        <p>Menyimpan data registrasi...</p>
+            <!-- Data Section -->
+            <div id="dataSection" class="content-section">
+                <div class="mobile-card">
+                    <div class="mobile-card-header">
+                        <i class="fas fa-database me-2"></i>Data Registrasi Tersimpan
+                    </div>
+                    <div id="dataList" style="max-height: 70vh; overflow-y: auto;">
+                        <div style="text-align: center; padding: 2rem; color: #666;">
+                            <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
+                            <p>Belum ada data registrasi</p>
+                            <small>Data akan muncul setelah melakukan registrasi</small>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Data Section -->
-        <div id="dataSection" class="content-section">
-            <div class="mobile-card">
-                <div class="mobile-card-header">
-                    <i class="fas fa-database me-2"></i>Data Registrasi Tersimpan
-                </div>
-                <div id="dataList" style="max-height: 70vh; overflow-y: auto;">
-                    <div style="text-align: center; padding: 2rem; color: #666;">
-                        <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
-                        <p>Belum ada data registrasi</p>
-                        <small>Data akan muncul setelah melakukan registrasi</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Floating Action Button -->
+        <button class="fab" onclick="scrollToTop()" title="Scroll to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </div>
-
-    <!-- Floating Action Button -->
-    <button class="fab" onclick="scrollToTop()" title="Scroll to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
 
     <!-- Alert Container -->
     <div id="alertContainer"></div>
@@ -492,7 +698,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, orderBy, query } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, orderBy, query, where } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
         // Firebase Configuration
         const firebaseConfig = {
@@ -516,6 +722,7 @@
         window.getDocs = getDocs;
         window.orderBy = orderBy;
         window.query = query;
+        window.where = where;
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
@@ -523,33 +730,151 @@
     <script>
         let registrationCounter = 1;
         
-        // Set tanggal hari ini sebagai default
-        document.getElementById('tanggal').valueAsDate = new Date();
-        
+        // Authentication Functions
+        function checkAuth() {
+            const currentUser = localStorage.getItem('pinuslo_user');
+            if (currentUser) {
+                const userData = JSON.parse(currentUser);
+                document.getElementById('currentUser').textContent = userData.username;
+                showPage('mainApp');
+                initializeApp();
+            } else {
+                showPage('loginPage');
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Login Form Handler
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.getElementById('loginButton');
+            const loginText = document.getElementById('loginText');
+            const loginLoading = document.getElementById('loginLoading');
+            
+            // Show loading
+            loginButton.disabled = true;
+            loginText.style.display = 'none';
+            loginLoading.style.display = 'flex';
+            
+            try {
+                // Query user from Firestore
+                const q = window.query(
+                    window.collection(window.db, 'users'), 
+                    window.where('username', '==', username),
+                    window.where('password', '==', password)
+                );
+                const querySnapshot = await window.getDocs(q);
+                
+                if (!querySnapshot.empty) {
+                    // Login successful
+                    const userData = querySnapshot.docs[0].data();
+                    
+                    // Save to localStorage
+                    localStorage.setItem('pinuslo_user', JSON.stringify({
+                        username: userData.username,
+                        role: userData.role || 'petugas',
+                        loginTime: new Date().toISOString()
+                    }));
+                    
+                    showLoginAlert('✅ Login berhasil! Selamat datang.', 'success');
+                    
+                    setTimeout(() => {
+                        document.getElementById('currentUser').textContent = userData.username;
+                        showPage('mainApp');
+                        initializeApp();
+                    }, 1000);
+                    
+                } else {
+                    // Login failed
+                    showLoginAlert('❌ Username atau password salah!', 'danger');
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showLoginAlert('⚠️ Terjadi kesalahan. Periksa koneksi internet.', 'warning');
+            } finally {
+                // Hide loading
+                loginButton.disabled = false;
+                loginText.style.display = 'block';
+                loginLoading.style.display = 'none';
+            }
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                localStorage.removeItem('pinuslo_user');
+                
+                // Reset form
+                document.getElementById('loginForm').reset();
+                document.getElementById('registrationForm').reset();
+                
+                showAlert('✅ Berhasil logout!', 'success');
+                
+                setTimeout(() => {
+                    showPage('loginPage');
+                }, 1000);
+            }
+        }
+
+        // Make logout globally available
+        window.logout = logout;
+
+        // Show login alert
+        function showLoginAlert(message, type = 'success') {
+            const alertContainer = document.getElementById('loginAlert');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} mt-3`;
+            alertDiv.style.borderRadius = '12px';
+            alertDiv.style.border = 'none';
+            alertDiv.innerHTML = message;
+            alertContainer.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 3000);
+        }
+
+        // Initialize main app
+        function initializeApp() {
+            // Set tanggal hari ini sebagai default
+            document.getElementById('tanggal').valueAsDate = new Date();
+            updateTicketNumber();
+            updateTotal();
+            loadData();
+        }
+
         // Mobile navigation
         function showSection(section) {
-            // Hide all sections
             document.querySelectorAll('.content-section').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // Remove active from nav items
             document.querySelectorAll('.mobile-nav-item').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // Show selected section
             if (section === 'form') {
                 document.getElementById('formSection').classList.add('active');
                 document.querySelector('.mobile-nav-item').classList.add('active');
             } else {
                 document.getElementById('dataSection').classList.add('active');
                 document.querySelectorAll('.mobile-nav-item')[1].classList.add('active');
-                loadData(); // Auto refresh data when viewing
+                loadData();
             }
         }
         
-        // Make showSection globally available
         window.showSection = showSection;
         
         // Generate nomor tiket otomatis
@@ -563,15 +888,14 @@
             return `PIN-${day}${month}${year}-${regNumber}`;
         }
         
-        // Update nomor tiket saat tanggal berubah
-        document.getElementById('tanggal').addEventListener('change', function() {
-            updateTicketNumber();
-        });
-        
         function updateTicketNumber() {
             const ticketNumber = generateTicketNumber();
             document.getElementById('ticketDisplay').textContent = ticketNumber;
         }
+        
+        document.getElementById('tanggal').addEventListener('change', function() {
+            updateTicketNumber();
+        });
         
         // Update total saat input berubah
         function updateTotal() {
@@ -589,7 +913,6 @@
         
         // Tampilkan alert mobile
         function showAlert(message, type = 'success') {
-            // Remove existing alerts
             document.querySelectorAll('.mobile-alert').forEach(el => el.remove());
             
             const alertDiv = document.createElement('div');
@@ -603,7 +926,6 @@
             `;
             document.getElementById('alertContainer').appendChild(alertDiv);
             
-            // Auto remove after 4 seconds
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
@@ -620,6 +942,8 @@
             
             try {
                 const jenisSelect = document.getElementById('jenisKunjungan');
+                const currentUser = JSON.parse(localStorage.getItem('pinuslo_user'));
+                
                 const formData = {
                     petugasLoket: document.getElementById('petugasLoket').value,
                     nomorTiket: document.getElementById('ticketDisplay').textContent,
@@ -627,21 +951,20 @@
                     jumlahOrang: parseInt(document.getElementById('jumlahOrang').value),
                     jenisKunjungan: jenisSelect.options[jenisSelect.selectedIndex].text,
                     total: parseInt(document.getElementById('totalAmount').textContent.replace(/\./g, '')),
-                    timestamp: new Date()
+                    timestamp: new Date(),
+                    createdBy: currentUser.username
                 };
                 
                 await window.addDoc(window.collection(window.db, 'registrasi'), formData);
                 
                 showAlert('✅ Registrasi berhasil disimpan!', 'success');
                 
-                // Reset form
                 document.getElementById('registrationForm').reset();
                 document.getElementById('tanggal').valueAsDate = new Date();
                 registrationCounter++;
                 updateTicketNumber();
                 updateTotal();
                 
-                // Auto switch to data view after successful registration
                 setTimeout(() => {
                     showSection('data');
                 }, 1500);
@@ -678,7 +1001,6 @@
                     const data = doc.data();
                     const date = new Date(data.timestamp.seconds * 1000);
                     
-                    // Get emoji for jenis kunjungan
                     let emoji = '🎫';
                     if (data.jenisKunjungan.includes('Cafe')) emoji = '☕';
                     else if (data.jenisKunjungan.includes('Weekday')) emoji = '🏠';
@@ -695,7 +1017,8 @@
                                 <strong>📅 Tanggal:</strong> ${new Date(data.tanggal).toLocaleDateString('id-ID')}<br>
                                 <strong>👥 Jumlah:</strong> ${data.jumlahOrang} orang<br>
                                 <strong>🎯 Paket:</strong> ${data.jenisKunjungan}<br>
-                                <strong>💰 Total:</strong> <span style="color: var(--accent-color); font-weight: bold;">Rp ${data.total.toLocaleString('id-ID')}</span>
+                                <strong>💰 Total:</strong> <span style="color: var(--accent-color); font-weight: bold;">Rp ${data.total.toLocaleString('id-ID')}</span><br>
+                                <strong>📝 Dibuat oleh:</strong> ${data.createdBy || 'Admin'}
                             </div>
                             <div class="mobile-data-footer">
                                 <i class="fas fa-clock me-1"></i>
@@ -707,7 +1030,6 @@
                 
                 dataList.innerHTML = html;
                 
-                // Update counter berdasarkan data terakhir
                 if (!querySnapshot.empty) {
                     registrationCounter = querySnapshot.size + 1;
                     updateTicketNumber();
@@ -719,7 +1041,6 @@
             }
         }
         
-        // Scroll to top function
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
@@ -727,40 +1048,22 @@
             });
         }
         
-        // Make functions globally available
         window.loadData = loadData;
         window.scrollToTop = scrollToTop;
         
-        // Initialize
-        updateTicketNumber();
-        updateTotal();
-        loadData();
-        
-        // Update FAB behavior on scroll
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const fab = document.querySelector('.fab');
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                fab.style.transform = 'scale(0.8)';
-            } else {
-                // Scrolling up
-                fab.style.transform = 'scale(1)';
-            }
-            lastScrollTop = scrollTop;
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
         });
-        
-        // Add haptic feedback for mobile devices
+
+        // Add haptic feedback
         function addHapticFeedback() {
             if ('vibrate' in navigator) {
                 navigator.vibrate(50);
             }
         }
         
-        // Add haptic feedback to buttons
-        document.querySelectorAll('.mobile-btn, .mobile-nav-item, .fab').forEach(element => {
+        document.querySelectorAll('.mobile-btn, .mobile-nav-item, .fab, .login-btn').forEach(element => {
             element.addEventListener('click', addHapticFeedback);
         });
     </script>
