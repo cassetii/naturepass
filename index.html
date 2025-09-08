@@ -14,131 +14,283 @@
             --light-bg: #f8f9fa;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--light-bg) 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-        }
-
-        .main-container {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(51, 77, 43, 0.1);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            color: white;
-            padding: 1.5rem;
-            border: none;
-        }
-
-        .card-title {
             margin: 0;
-            font-weight: 600;
-            text-align: center;
+            padding: 0;
+            min-height: 100vh;
+            line-height: 1.6;
         }
 
-        .form-control, .form-select {
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.2rem rgba(126, 162, 48, 0.25);
-        }
-
-        .btn-primary {
+        /* Mobile First Design */
+        .mobile-header {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(51, 77, 43, 0.3);
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
-            border: none;
-            border-radius: 10px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .total-display {
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
             color: white;
-            padding: 1rem;
-            border-radius: 10px;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-header h1 {
+            font-size: 1.25rem;
+            margin: 0;
             text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 1rem 0;
+            font-weight: 600;
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
+        .mobile-container {
+            padding: 0;
+            margin: 0;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .mobile-card {
+            background: white;
+            margin: 0.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(51, 77, 43, 0.15);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .slide-in {
-            animation: slideIn 0.6s ease-out;
+        .mobile-card-header {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
+        .mobile-form-section {
+            padding: 1.5rem;
         }
 
-        .pulse {
+        .mobile-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        .mobile-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .mobile-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(126, 162, 48, 0.25);
+            outline: none;
+        }
+
+        .mobile-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.2rem rgba(126, 162, 48, 0.25);
+            outline: none;
+        }
+
+        .mobile-ticket-display {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px dashed var(--accent-color);
+            padding: 1.25rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: var(--primary-color);
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .mobile-total-display {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(126, 162, 48, 0.3);
         }
 
-        .loading {
+        .mobile-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+
+        .mobile-btn-secondary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .mobile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .mobile-btn:active {
+            transform: translateY(0);
+        }
+
+        .mobile-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .mobile-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Tab Navigation */
+        .mobile-nav {
+            display: flex;
+            background: white;
+            margin: 0.5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .mobile-nav-item {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            background: #f8f9fa;
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .mobile-nav-item.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .mobile-nav-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Data List Mobile */
+        .mobile-data-item {
+            background: white;
+            margin: 0.5rem;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-color);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .mobile-data-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .mobile-data-header {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-data-content {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .mobile-data-footer {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+
+        /* Loading Animation */
+        .mobile-loading {
             display: none;
             text-align: center;
-            padding: 1rem;
+            padding: 2rem;
         }
 
-        .spinner-border {
-            color: var(--accent-color);
+        .mobile-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
         }
 
-        .alert {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Alert Mobile */
+        .mobile-alert {
+            position: fixed;
+            top: 80px;
+            left: 0.5rem;
+            right: 0.5rem;
+            z-index: 1050;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             animation: slideDown 0.5s ease-out;
         }
 
@@ -147,155 +299,195 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .ticket-number {
-            background: var(--light-bg);
-            border: 2px dashed var(--accent-color);
-            padding: 1rem;
-            border-radius: 10px;
-            margin: 1rem 0;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: var(--primary-color);
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .mobile-card {
+                margin: 0.25rem;
+                border-radius: 12px;
+            }
+            
+            .mobile-form-section {
+                padding: 1rem;
+            }
+            
+            .mobile-total-display {
+                font-size: 1.25rem;
+                padding: 1.25rem;
+            }
         }
 
-        .data-table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        /* Hide content sections */
+        .content-section {
+            display: none;
         }
 
-        .table thead th {
-            background: var(--primary-color);
-            color: white;
+        .content-section.active {
+            display: block;
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            border-radius: 50%;
             border: none;
-            padding: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 20px rgba(126, 162, 48, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
         }
 
-        .table tbody tr:hover {
-            background: rgba(126, 162, 48, 0.1);
-            transition: all 0.3s ease;
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(126, 162, 48, 0.6);
+        }
+
+        /* Price tags */
+        .price-tag {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="container main-container">
-        <!-- Header -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <div class="card fade-in">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <i class="fas fa-mountain me-2"></i>
-                            Registrasi Kawasan Hutan Pinuslo
-                        </h2>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <h1>
+            <i class="fas fa-mountain me-2"></i>
+            Registrasi Kawasan Hutan Pinuslo
+        </h1>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item active" onclick="showSection('form')">
+            <i class="fas fa-edit me-1"></i>Form
+        </div>
+        <div class="mobile-nav-item" onclick="showSection('data')">
+            <i class="fas fa-list me-1"></i>Data
+        </div>
+    </div>
+
+    <div class="mobile-container">
+        <!-- Form Section -->
+        <div id="formSection" class="content-section active">
+            <div class="mobile-card">
+                <div class="mobile-card-header">
+                    <i class="fas fa-user-edit me-2"></i>Form Registrasi Baru
+                </div>
+                <div class="mobile-form-section">
+                    <form id="registrationForm">
+                        <div class="mobile-form-group">
+                            <label class="mobile-label">
+                                <i class="fas fa-user me-2"></i>Nama Petugas Loket
+                            </label>
+                            <input type="text" class="mobile-input" id="petugasLoket" placeholder="Masukkan nama petugas" required>
+                        </div>
+
+                        <div class="mobile-form-group">
+                            <label class="mobile-label">
+                                <i class="fas fa-calendar me-2"></i>Tanggal Kunjungan
+                            </label>
+                            <input type="date" class="mobile-input" id="tanggal" required>
+                        </div>
+
+                        <div class="mobile-form-group">
+                            <label class="mobile-label">
+                                <i class="fas fa-users me-2"></i>Jumlah Pengunjung
+                            </label>
+                            <input type="number" class="mobile-input" id="jumlahOrang" min="1" placeholder="1" value="1" required>
+                        </div>
+
+                        <div class="mobile-form-group">
+                            <label class="mobile-label">
+                                <i class="fas fa-list me-2"></i>Pilih Paket Kunjungan
+                            </label>
+                            <select class="mobile-select" id="jenisKunjungan" required>
+                                <option value="">-- Pilih Paket --</option>
+                                <option value="cafe" data-price="10000">☕ Kunjungan Cafe</option>
+                                <option value="weekday" data-price="15000">🏠 Menginap Weekday</option>
+                                <option value="weekend" data-price="20000">🌅 Menginap Weekend</option>
+                                <option value="hiking" data-price="50000">🥾 Paket Hiking</option>
+                            </select>
+                        </div>
+
+                        <div class="mobile-ticket-display">
+                            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">Nomor Tiket</div>
+                            <div id="ticketDisplay" style="font-size: 1.2rem;">-</div>
+                        </div>
+
+                        <div class="mobile-total-display">
+                            <i class="fas fa-money-bill-wave me-2"></i>
+                            <div>Total Pembayaran</div>
+                            <div style="font-size: 2rem; margin-top: 0.5rem;">
+                                Rp <span id="totalAmount">0</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="mobile-btn mobile-btn-primary">
+                            <i class="fas fa-save me-2"></i>Simpan Registrasi
+                        </button>
+                        
+                        <button type="button" class="mobile-btn mobile-btn-secondary" onclick="loadData()">
+                            <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                        </button>
+                    </form>
+
+                    <div class="mobile-loading" id="loading">
+                        <div class="mobile-spinner"></div>
+                        <p>Menyimpan data registrasi...</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <!-- Form Registrasi -->
-            <div class="col-lg-8">
-                <div class="card slide-in">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            <i class="fas fa-edit me-2"></i>
-                            Form Registrasi
-                        </h4>
-                    </div>
-                    <div class="card-body">
-                        <form id="registrationForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="petugasLoket" class="form-label">
-                                        <i class="fas fa-user me-2"></i>Nama Petugas Loket
-                                    </label>
-                                    <input type="text" class="form-control" id="petugasLoket" placeholder="Masukkan nama petugas" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="tanggal" class="form-label">
-                                        <i class="fas fa-calendar me-2"></i>Tanggal Hari
-                                    </label>
-                                    <input type="date" class="form-control" id="tanggal" required>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="jumlahOrang" class="form-label">
-                                        <i class="fas fa-users me-2"></i>Jumlah Orang
-                                    </label>
-                                    <input type="number" class="form-control" id="jumlahOrang" min="1" placeholder="1" value="1" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="jenisKunjungan" class="form-label">
-                                        <i class="fas fa-list me-2"></i>Jenis Kunjungan
-                                    </label>
-                                    <select class="form-select" id="jenisKunjungan" required>
-                                        <option value="">Pilih jenis kunjungan</option>
-                                        <option value="cafe" data-price="10000">Kunjungan Cafe - Rp 10.000</option>
-                                        <option value="weekday" data-price="15000">Kunjungan Menginap Weekday - Rp 15.000</option>
-                                        <option value="weekend" data-price="20000">Kunjungan Menginap Weekend - Rp 20.000</option>
-                                        <option value="hiking" data-price="50000">Paket Hiking - Rp 50.000</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="ticket-number" id="ticketNumber">
-                                <i class="fas fa-ticket-alt me-2"></i>
-                                Nomor Tiket: <span id="ticketDisplay">-</span>
-                            </div>
-
-                            <div class="total-display pulse">
-                                <i class="fas fa-money-bill-wave me-2"></i>
-                                Total: Rp <span id="totalAmount">0</span>
-                            </div>
-
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-secondary me-md-2" onclick="loadData()">
-                                    <i class="fas fa-sync-alt me-2"></i>Load Data
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-2"></i>Simpan Registrasi
-                                </button>
-                            </div>
-                        </form>
-
-                        <div class="loading" id="loading">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <p class="mt-2">Menyimpan data...</p>
-                        </div>
-
-                        <div id="alertContainer"></div>
-                    </div>
+        <!-- Data Section -->
+        <div id="dataSection" class="content-section">
+            <div class="mobile-card">
+                <div class="mobile-card-header">
+                    <i class="fas fa-database me-2"></i>Data Registrasi Tersimpan
                 </div>
-            </div>
-
-            <!-- Data List -->
-            <div class="col-lg-4">
-                <div class="card fade-in">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            <i class="fas fa-list me-2"></i>
-                            Data Registrasi
-                        </h4>
-                    </div>
-                    <div class="card-body" style="max-height: 600px; overflow-y: auto;">
-                        <div id="dataList">
-                            <p class="text-center text-muted">
-                                <i class="fas fa-info-circle me-2"></i>
-                                Belum ada data registrasi
-                            </p>
-                        </div>
+                <div id="dataList" style="max-height: 70vh; overflow-y: auto;">
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
+                        <p>Belum ada data registrasi</p>
+                        <small>Data akan muncul setelah melakukan registrasi</small>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Alert Container -->
+    <div id="alertContainer"></div>
 
     <!-- Firebase SDK -->
     <script type="module">
@@ -334,6 +526,32 @@
         // Set tanggal hari ini sebagai default
         document.getElementById('tanggal').valueAsDate = new Date();
         
+        // Mobile navigation
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Remove active from nav items
+            document.querySelectorAll('.mobile-nav-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected section
+            if (section === 'form') {
+                document.getElementById('formSection').classList.add('active');
+                document.querySelector('.mobile-nav-item').classList.add('active');
+            } else {
+                document.getElementById('dataSection').classList.add('active');
+                document.querySelectorAll('.mobile-nav-item')[1].classList.add('active');
+                loadData(); // Auto refresh data when viewing
+            }
+        }
+        
+        // Make showSection globally available
+        window.showSection = showSection;
+        
         // Generate nomor tiket otomatis
         function generateTicketNumber() {
             const date = new Date(document.getElementById('tanggal').value);
@@ -369,24 +587,28 @@
         document.getElementById('jumlahOrang').addEventListener('input', updateTotal);
         document.getElementById('jenisKunjungan').addEventListener('change', updateTotal);
         
-        // Tampilkan alert
+        // Tampilkan alert mobile
         function showAlert(message, type = 'success') {
-            const alertContainer = document.getElementById('alertContainer');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
-            alertDiv.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            alertContainer.appendChild(alertDiv);
+            // Remove existing alerts
+            document.querySelectorAll('.mobile-alert').forEach(el => el.remove());
             
-            // Auto remove after 5 seconds
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} mobile-alert`;
+            alertDiv.innerHTML = `
+                <div style="display: flex; align-items: center;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                    <span style="flex: 1;">${message}</span>
+                    <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
+                </div>
+            `;
+            document.getElementById('alertContainer').appendChild(alertDiv);
+            
+            // Auto remove after 4 seconds
             setTimeout(() => {
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
                 }
-            }, 5000);
+            }, 4000);
         }
         
         // Submit form
@@ -397,19 +619,20 @@
             loading.style.display = 'block';
             
             try {
+                const jenisSelect = document.getElementById('jenisKunjungan');
                 const formData = {
                     petugasLoket: document.getElementById('petugasLoket').value,
                     nomorTiket: document.getElementById('ticketDisplay').textContent,
                     tanggal: document.getElementById('tanggal').value,
                     jumlahOrang: parseInt(document.getElementById('jumlahOrang').value),
-                    jenisKunjungan: document.getElementById('jenisKunjungan').options[document.getElementById('jenisKunjungan').selectedIndex].text,
+                    jenisKunjungan: jenisSelect.options[jenisSelect.selectedIndex].text,
                     total: parseInt(document.getElementById('totalAmount').textContent.replace(/\./g, '')),
                     timestamp: new Date()
                 };
                 
                 await window.addDoc(window.collection(window.db, 'registrasi'), formData);
                 
-                showAlert('Data berhasil disimpan!', 'success');
+                showAlert('✅ Registrasi berhasil disimpan!', 'success');
                 
                 // Reset form
                 document.getElementById('registrationForm').reset();
@@ -418,12 +641,14 @@
                 updateTicketNumber();
                 updateTotal();
                 
-                // Load data terbaru
-                loadData();
+                // Auto switch to data view after successful registration
+                setTimeout(() => {
+                    showSection('data');
+                }, 1500);
                 
             } catch (error) {
                 console.error('Error:', error);
-                showAlert('Gagal menyimpan data. Pastikan Firebase rules sudah dikonfigurasi dengan benar.', 'danger');
+                showAlert('❌ Gagal menyimpan data. Periksa koneksi internet dan Firebase rules.', 'danger');
             } finally {
                 loading.style.display = 'none';
             }
@@ -439,10 +664,11 @@
                 
                 if (querySnapshot.empty) {
                     dataList.innerHTML = `
-                        <p class="text-center text-muted">
-                            <i class="fas fa-info-circle me-2"></i>
-                            Belum ada data registrasi
-                        </p>
+                        <div style="text-align: center; padding: 2rem; color: #666;">
+                            <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
+                            <h5>Belum ada data registrasi</h5>
+                            <p>Data akan muncul setelah melakukan registrasi pertama</p>
+                        </div>
                     `;
                     return;
                 }
@@ -452,21 +678,28 @@
                     const data = doc.data();
                     const date = new Date(data.timestamp.seconds * 1000);
                     
+                    // Get emoji for jenis kunjungan
+                    let emoji = '🎫';
+                    if (data.jenisKunjungan.includes('Cafe')) emoji = '☕';
+                    else if (data.jenisKunjungan.includes('Weekday')) emoji = '🏠';
+                    else if (data.jenisKunjungan.includes('Weekend')) emoji = '🌅';
+                    else if (data.jenisKunjungan.includes('Hiking')) emoji = '🥾';
+                    
                     html += `
-                        <div class="card mb-2 fade-in">
-                            <div class="card-body p-3">
-                                <h6 class="card-title text-primary">${data.nomorTiket}</h6>
-                                <p class="card-text small mb-1">
-                                    <strong>Petugas:</strong> ${data.petugasLoket}<br>
-                                    <strong>Tanggal:</strong> ${data.tanggal}<br>
-                                    <strong>Jumlah:</strong> ${data.jumlahOrang} orang<br>
-                                    <strong>Jenis:</strong> ${data.jenisKunjungan}<br>
-                                    <strong>Total:</strong> Rp ${data.total.toLocaleString('id-ID')}
-                                </p>
-                                <small class="text-muted">
-                                    <i class="fas fa-clock me-1"></i>
-                                    ${date.toLocaleString('id-ID')}
-                                </small>
+                        <div class="mobile-data-item">
+                            <div class="mobile-data-header">
+                                ${emoji} ${data.nomorTiket}
+                            </div>
+                            <div class="mobile-data-content">
+                                <strong>👤 Petugas:</strong> ${data.petugasLoket}<br>
+                                <strong>📅 Tanggal:</strong> ${new Date(data.tanggal).toLocaleDateString('id-ID')}<br>
+                                <strong>👥 Jumlah:</strong> ${data.jumlahOrang} orang<br>
+                                <strong>🎯 Paket:</strong> ${data.jenisKunjungan}<br>
+                                <strong>💰 Total:</strong> <span style="color: var(--accent-color); font-weight: bold;">Rp ${data.total.toLocaleString('id-ID')}</span>
+                            </div>
+                            <div class="mobile-data-footer">
+                                <i class="fas fa-clock me-1"></i>
+                                ${date.toLocaleString('id-ID')}
                             </div>
                         </div>
                     `;
@@ -482,17 +715,54 @@
                 
             } catch (error) {
                 console.error('Error loading data:', error);
-                showAlert('Gagal memuat data. Pastikan Firebase rules sudah dikonfigurasi dengan benar.', 'warning');
+                showAlert('⚠️ Gagal memuat data. Periksa koneksi internet.', 'warning');
             }
         }
         
-        // Make loadData globally available
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Make functions globally available
         window.loadData = loadData;
+        window.scrollToTop = scrollToTop;
         
         // Initialize
         updateTicketNumber();
         updateTotal();
         loadData();
+        
+        // Update FAB behavior on scroll
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const fab = document.querySelector('.fab');
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                fab.style.transform = 'scale(0.8)';
+            } else {
+                // Scrolling up
+                fab.style.transform = 'scale(1)';
+            }
+            lastScrollTop = scrollTop;
+        });
+        
+        // Add haptic feedback for mobile devices
+        function addHapticFeedback() {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(50);
+            }
+        }
+        
+        // Add haptic feedback to buttons
+        document.querySelectorAll('.mobile-btn, .mobile-nav-item, .fab').forEach(element => {
+            element.addEventListener('click', addHapticFeedback);
+        });
     </script>
 </body>
 </html>
