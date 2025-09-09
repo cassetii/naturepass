@@ -119,8 +119,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 1rem;
         }
 
         .login-btn:hover {
@@ -134,20 +133,34 @@
             transform: none;
         }
 
-        .login-loading {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        .quick-login-btn {
+            flex: 1;
+            min-width: 60px;
+            padding: 0.75rem;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
         }
 
-        .login-spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #ffffff40;
-            border-top: 2px solid #ffffff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .quick-login-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .credentials-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
         }
 
         /* Main App Styles */
@@ -326,21 +339,6 @@
 
         .mobile-btn:active {
             transform: translateY(0);
-        }
-
-        .mobile-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .mobile-btn:hover::before {
-            left: 100%;
         }
 
         /* Tab Navigation */
@@ -537,31 +535,42 @@
                     <p class="login-subtitle">Sistem Registrasi Kawasan</p>
                 </div>
 
-                <form id="loginForm">
+                <div class="credentials-info">
+                    <strong>🔑 Login Credentials:</strong><br>
+                    <strong>Username:</strong> selow1, selow2, selow3, selow4, selow5<br>
+                    <strong>Password:</strong> selow1234 (untuk semua user)
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
                     <div class="login-form-group">
                         <label class="login-label">
                             <i class="fas fa-user me-2"></i>Username
                         </label>
-                        <input type="text" class="login-input" id="username" placeholder="Masukkan username" required>
+                        <input type="text" class="login-input" id="username" placeholder="selow1, selow2, selow3, selow4, selow5" required>
                     </div>
 
                     <div class="login-form-group">
                         <label class="login-label">
                             <i class="fas fa-lock me-2"></i>Password
                         </label>
-                        <input type="password" class="login-input" id="password" placeholder="Masukkan password" required>
+                        <input type="password" class="login-input" id="password" placeholder="selow1234" required>
                     </div>
 
                     <button type="submit" class="login-btn" id="loginButton">
-                        <span id="loginText">
-                            <i class="fas fa-sign-in-alt me-2"></i>Masuk
-                        </span>
-                        <div class="login-loading" id="loginLoading">
-                            <div class="login-spinner"></div>
-                            <span>Memverifikasi...</span>
-                        </div>
+                        <i class="fas fa-sign-in-alt me-2"></i>Masuk
                     </button>
                 </form>
+
+                <div style="text-align: center; margin-bottom: 0.5rem; font-size: 0.9rem; color: #666;">
+                    <strong>Quick Login:</strong>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button type="button" class="quick-login-btn" onclick="quickLogin('selow1')">selow1</button>
+                    <button type="button" class="quick-login-btn" onclick="quickLogin('selow2')">selow2</button>
+                    <button type="button" class="quick-login-btn" onclick="quickLogin('selow3')">selow3</button>
+                    <button type="button" class="quick-login-btn" onclick="quickLogin('selow4')">selow4</button>
+                    <button type="button" class="quick-login-btn" onclick="quickLogin('selow5')">selow5</button>
+                </div>
 
                 <div id="loginAlert"></div>
             </div>
@@ -578,7 +587,7 @@
                     Registrasi Pinuslo
                 </h1>
                 <div class="user-info">
-                    <span id="currentUser">Admin</span>
+                    <span id="currentUser">User</span>
                     <button class="logout-btn" onclick="logout()">
                         <i class="fas fa-sign-out-alt"></i>
                     </button>
@@ -604,7 +613,7 @@
                         <i class="fas fa-user-edit me-2"></i>Form Registrasi Baru
                     </div>
                     <div class="mobile-form-section">
-                        <form id="registrationForm">
+                        <form id="registrationForm" onsubmit="handleRegistration(event)">
                             <div class="mobile-form-group">
                                 <label class="mobile-label">
                                     <i class="fas fa-user me-2"></i>Nama Petugas Loket
@@ -623,19 +632,19 @@
                                 <label class="mobile-label">
                                     <i class="fas fa-users me-2"></i>Jumlah Pengunjung
                                 </label>
-                                <input type="number" class="mobile-input" id="jumlahOrang" min="1" placeholder="1" value="1" required>
+                                <input type="number" class="mobile-input" id="jumlahOrang" min="1" placeholder="1" value="1" required onchange="updateTotal()">
                             </div>
 
                             <div class="mobile-form-group">
                                 <label class="mobile-label">
                                     <i class="fas fa-list me-2"></i>Pilih Paket Kunjungan
                                 </label>
-                                <select class="mobile-select" id="jenisKunjungan" required>
+                                <select class="mobile-select" id="jenisKunjungan" required onchange="updateTotal()">
                                     <option value="">-- Pilih Paket --</option>
-                                    <option value="cafe" data-price="10000">☕ Kunjungan Cafe</option>
-                                    <option value="weekday" data-price="15000">🏠 Menginap Weekday</option>
-                                    <option value="weekend" data-price="20000">🌅 Menginap Weekend</option>
-                                    <option value="hiking" data-price="50000">🥾 Paket Hiking</option>
+                                    <option value="cafe" data-price="10000">☕ Kunjungan Cafe - Rp 10.000</option>
+                                    <option value="weekday" data-price="15000">🏠 Menginap Weekday - Rp 15.000</option>
+                                    <option value="weekend" data-price="20000">🌅 Menginap Weekend - Rp 20.000</option>
+                                    <option value="hiking" data-price="50000">🥾 Paket Hiking - Rp 50.000</option>
                                 </select>
                             </div>
 
@@ -658,6 +667,10 @@
                             
                             <button type="button" class="mobile-btn mobile-btn-secondary" onclick="loadData()">
                                 <i class="fas fa-sync-alt me-2"></i>Refresh Data
+                            </button>
+
+                            <button type="button" class="mobile-btn" style="background: #ffc107; color: #000;" onclick="testFirebaseConnection()">
+                                <i class="fas fa-wifi me-2"></i>Test Firebase
                             </button>
                         </form>
 
@@ -698,7 +711,7 @@
     <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, orderBy, query, where } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+        import { getFirestore, collection, addDoc, getDocs, orderBy, query } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 
         // Firebase Configuration
         const firebaseConfig = {
@@ -722,141 +735,133 @@
         window.getDocs = getDocs;
         window.orderBy = orderBy;
         window.query = query;
-        window.where = where;
+        
+        console.log('Firebase initialized successfully');
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // Global Variables
         let registrationCounter = 1;
+        let currentUser = null;
+
+        // Default Users (Built-in)
+        const defaultUsers = [
+            { username: 'selow1', password: 'selow1234', role: 'petugas' },
+            { username: 'selow2', password: 'selow1234', role: 'petugas' },
+            { username: 'selow3', password: 'selow1234', role: 'petugas' },
+            { username: 'selow4', password: 'selow1234', role: 'petugas' },
+            { username: 'selow5', password: 'selow1234', role: 'petugas' }
+        ];
+
+        // ========== LOGIN FUNCTIONS ==========
         
-        // Authentication Functions
-        function checkAuth() {
-            const currentUser = localStorage.getItem('pinuslo_user');
-            if (currentUser) {
-                const userData = JSON.parse(currentUser);
-                document.getElementById('currentUser').textContent = userData.username;
-                showPage('mainApp');
-                initializeApp();
-            } else {
-                showPage('loginPage');
-            }
+        function quickLogin(username) {
+            console.log('Quick login:', username);
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = 'selow1234';
+            
+            // Visual feedback
+            event.target.style.background = '#7ea230';
+            event.target.innerHTML = '✓';
+            
+            setTimeout(() => {
+                handleLoginProcess(username, 'selow1234');
+            }, 500);
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-        }
-
-        // Login Form Handler
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function handleLogin(event) {
+            event.preventDefault();
+            console.log('Form login submitted');
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const loginButton = document.getElementById('loginButton');
-            const loginText = document.getElementById('loginText');
-            const loginLoading = document.getElementById('loginLoading');
             
-            // Show loading
-            loginButton.disabled = true;
-            loginText.style.display = 'none';
-            loginLoading.style.display = 'flex';
-            
-            try {
-                // Query user from Firestore
-                const q = window.query(
-                    window.collection(window.db, 'users'), 
-                    window.where('username', '==', username),
-                    window.where('password', '==', password)
-                );
-                const querySnapshot = await window.getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    // Login successful
-                    const userData = querySnapshot.docs[0].data();
-                    
-                    // Save to localStorage
-                    localStorage.setItem('pinuslo_user', JSON.stringify({
-                        username: userData.username,
-                        role: userData.role || 'petugas',
-                        loginTime: new Date().toISOString()
-                    }));
-                    
-                    showLoginAlert('✅ Login berhasil! Selamat datang.', 'success');
-                    
-                    setTimeout(() => {
-                        document.getElementById('currentUser').textContent = userData.username;
-                        showPage('mainApp');
-                        initializeApp();
-                    }, 1000);
-                    
-                } else {
-                    // Login failed
-                    showLoginAlert('❌ Username atau password salah!', 'danger');
-                }
-                
-            } catch (error) {
-                console.error('Login error:', error);
-                showLoginAlert('⚠️ Terjadi kesalahan. Periksa koneksi internet.', 'warning');
-            } finally {
-                // Hide loading
-                loginButton.disabled = false;
-                loginText.style.display = 'block';
-                loginLoading.style.display = 'none';
-            }
-        });
+            handleLoginProcess(username, password);
+        }
 
-        // Logout function
+        function handleLoginProcess(username, password) {
+            console.log('Processing login for:', username);
+            
+            // Check credentials
+            const user = defaultUsers.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                console.log('Login successful');
+                
+                // Save user session
+                currentUser = user;
+                localStorage.setItem('pinuslo_user', JSON.stringify(user));
+                
+                // Show success message
+                showLoginAlert('✅ Login berhasil! Selamat datang ' + user.username, 'success');
+                
+                // Switch to main app
+                setTimeout(() => {
+                    showMainApp();
+                }, 1000);
+                
+            } else {
+                console.log('Login failed');
+                showLoginAlert('❌ Username atau password salah!', 'danger');
+                
+                // Reset quick login buttons
+                document.querySelectorAll('.quick-login-btn').forEach(btn => {
+                    btn.style.background = '';
+                    btn.innerHTML = btn.onclick.toString().match(/quickLogin\('(\w+)'/)[1];
+                });
+            }
+        }
+
+        function showLoginAlert(message, type) {
+            const alertContainer = document.getElementById('loginAlert');
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} mt-3" style="border-radius: 12px; border: none;">
+                    ${message}
+                </div>
+            `;
+            
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 4000);
+        }
+
+        // ========== PAGE NAVIGATION ==========
+        
+        function showMainApp() {
+            document.getElementById('loginPage').classList.remove('active');
+            document.getElementById('mainApp').classList.add('active');
+            
+            document.getElementById('currentUser').textContent = currentUser.username;
+            
+            initializeApp();
+        }
+
+        function showLoginPage() {
+            document.getElementById('mainApp').classList.remove('active');
+            document.getElementById('loginPage').classList.add('active');
+        }
+
         function logout() {
             if (confirm('Apakah Anda yakin ingin keluar?')) {
                 localStorage.removeItem('pinuslo_user');
-                
-                // Reset form
-                document.getElementById('loginForm').reset();
-                document.getElementById('registrationForm').reset();
+                currentUser = null;
                 
                 showAlert('✅ Berhasil logout!', 'success');
                 
                 setTimeout(() => {
-                    showPage('loginPage');
+                    showLoginPage();
+                    
+                    // Reset forms
+                    document.getElementById('loginForm').reset();
+                    document.getElementById('registrationForm').reset();
                 }, 1000);
             }
         }
 
-        // Make logout globally available
-        window.logout = logout;
-
-        // Show login alert
-        function showLoginAlert(message, type = 'success') {
-            const alertContainer = document.getElementById('loginAlert');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type} mt-3`;
-            alertDiv.style.borderRadius = '12px';
-            alertDiv.style.border = 'none';
-            alertDiv.innerHTML = message;
-            alertContainer.appendChild(alertDiv);
-            
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.remove();
-                }
-            }, 3000);
-        }
-
-        // Initialize main app
-        function initializeApp() {
-            // Set tanggal hari ini sebagai default
-            document.getElementById('tanggal').valueAsDate = new Date();
-            updateTicketNumber();
-            updateTotal();
-            loadData();
-        }
-
-        // Mobile navigation
         function showSection(section) {
+            // Remove active from all sections
             document.querySelectorAll('.content-section').forEach(el => {
                 el.classList.remove('active');
             });
@@ -865,6 +870,7 @@
                 el.classList.remove('active');
             });
             
+            // Show selected section
             if (section === 'form') {
                 document.getElementById('formSection').classList.add('active');
                 document.querySelector('.mobile-nav-item').classList.add('active');
@@ -874,12 +880,40 @@
                 loadData();
             }
         }
+
+        // ========== APP INITIALIZATION ==========
         
-        window.showSection = showSection;
+        function initializeApp() {
+            console.log('Initializing main app');
+            
+            // Set default date
+            document.getElementById('tanggal').valueAsDate = new Date();
+            
+            // Update ticket and total
+            updateTicketNumber();
+            updateTotal();
+            
+            // Load data
+            loadData();
+        }
+
+        function checkAuth() {
+            const savedUser = localStorage.getItem('pinuslo_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMainApp();
+            } else {
+                showLoginPage();
+            }
+        }
+
+        // ========== TICKET & CALCULATION ==========
         
-        // Generate nomor tiket otomatis
         function generateTicketNumber() {
-            const date = new Date(document.getElementById('tanggal').value);
+            const dateInput = document.getElementById('tanggal');
+            if (!dateInput.value) return 'PIN-00000000-0000';
+            
+            const date = new Date(dateInput.value);
             const day = String(date.getDate()).padStart(2, '0');
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
@@ -893,11 +927,6 @@
             document.getElementById('ticketDisplay').textContent = ticketNumber;
         }
         
-        document.getElementById('tanggal').addEventListener('change', function() {
-            updateTicketNumber();
-        });
-        
-        // Update total saat input berubah
         function updateTotal() {
             const jumlahOrang = parseInt(document.getElementById('jumlahOrang').value) || 0;
             const jenisSelect = document.getElementById('jenisKunjungan');
@@ -907,88 +936,74 @@
             const total = jumlahOrang * price;
             document.getElementById('totalAmount').textContent = total.toLocaleString('id-ID');
         }
+
+        // ========== REGISTRATION FORM ==========
         
-        document.getElementById('jumlahOrang').addEventListener('input', updateTotal);
-        document.getElementById('jenisKunjungan').addEventListener('change', updateTotal);
-        
-        // Tampilkan alert mobile
-        function showAlert(message, type = 'success') {
-            document.querySelectorAll('.mobile-alert').forEach(el => el.remove());
-            
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type} mobile-alert`;
-            
-            // Handle different alert types
-            let iconClass = 'check-circle';
-            if (type === 'danger') iconClass = 'exclamation-triangle';
-            else if (type === 'warning') iconClass = 'exclamation-circle';
-            else if (type === 'info') iconClass = 'info-circle';
-            
-            alertDiv.innerHTML = `
-                <div style="display: flex; align-items: center;">
-                    <i class="fas fa-${iconClass} me-2"></i>
-                    <span style="flex: 1;">${message}</span>
-                    <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
-                </div>
-            `;
-            document.getElementById('alertContainer').appendChild(alertDiv);
-            
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.remove();
-                }
-            }, 6000);
-        }
-        
-        // Submit form
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        function handleRegistration(event) {
+            event.preventDefault();
+            console.log('Registration form submitted');
             
             const loading = document.getElementById('loading');
             loading.style.display = 'block';
             
+            // Get form data
+            const jenisSelect = document.getElementById('jenisKunjungan');
+            const formData = {
+                petugasLoket: document.getElementById('petugasLoket').value,
+                nomorTiket: document.getElementById('ticketDisplay').textContent,
+                tanggal: document.getElementById('tanggal').value,
+                jumlahOrang: parseInt(document.getElementById('jumlahOrang').value),
+                jenisKunjungan: jenisSelect.options[jenisSelect.selectedIndex].text,
+                total: parseInt(document.getElementById('totalAmount').textContent.replace(/\./g, '')),
+                timestamp: new Date(),
+                createdBy: currentUser.username
+            };
+            
+            console.log('Form data:', formData);
+            
+            // Save to Firebase
+            saveToFirebase(formData, loading);
+        }
+
+        async function saveToFirebase(formData, loading) {
             try {
-                const jenisSelect = document.getElementById('jenisKunjungan');
-                const currentUser = JSON.parse(localStorage.getItem('pinuslo_user'));
-                
-                const formData = {
-                    petugasLoket: document.getElementById('petugasLoket').value,
-                    nomorTiket: document.getElementById('ticketDisplay').textContent,
-                    tanggal: document.getElementById('tanggal').value,
-                    jumlahOrang: parseInt(document.getElementById('jumlahOrang').value),
-                    jenisKunjungan: jenisSelect.options[jenisSelect.selectedIndex].text,
-                    total: parseInt(document.getElementById('totalAmount').textContent.replace(/\./g, '')),
-                    timestamp: new Date(),
-                    createdBy: currentUser.username
-                };
+                console.log('Saving to Firebase...');
                 
                 await window.addDoc(window.collection(window.db, 'registrasi'), formData);
                 
+                console.log('Save successful');
                 showAlert('✅ Registrasi berhasil disimpan!', 'success');
                 
+                // Reset form
                 document.getElementById('registrationForm').reset();
                 document.getElementById('tanggal').valueAsDate = new Date();
                 registrationCounter++;
                 updateTicketNumber();
                 updateTotal();
                 
+                // Auto switch to data view
                 setTimeout(() => {
                     showSection('data');
                 }, 1500);
                 
             } catch (error) {
-                console.error('Error:', error);
-                showAlert('❌ Gagal menyimpan data. Periksa koneksi internet dan Firebase rules.', 'danger');
+                console.error('Firebase save error:', error);
+                showAlert('❌ Gagal menyimpan data. Error: ' + error.message, 'danger');
             } finally {
                 loading.style.display = 'none';
             }
-        });
+        }
+
+        // ========== DATA LOADING ==========
         
-        // Load data dari Firebase
         async function loadData() {
+            console.log('Loading data from Firebase...');
+            
             try {
                 const q = window.query(window.collection(window.db, 'registrasi'), window.orderBy('timestamp', 'desc'));
                 const querySnapshot = await window.getDocs(q);
+                
+                console.log('Data loaded, documents:', querySnapshot.size);
                 
                 const dataList = document.getElementById('dataList');
                 
@@ -1037,15 +1052,83 @@
                 
                 dataList.innerHTML = html;
                 
+                // Update counter
                 if (!querySnapshot.empty) {
                     registrationCounter = querySnapshot.size + 1;
                     updateTicketNumber();
                 }
                 
             } catch (error) {
-                console.error('Error loading data:', error);
-                showAlert('⚠️ Gagal memuat data. Periksa koneksi internet.', 'warning');
+                console.error('Load data error:', error);
+                showAlert('⚠️ Gagal memuat data. Error: ' + error.message, 'warning');
             }
+        }
+
+        // ========== FIREBASE TEST ==========
+        
+        async function testFirebaseConnection() {
+            showAlert('🔄 Testing Firebase connection...', 'info');
+            
+            try {
+                console.log('Testing Firebase...');
+                
+                const testData = {
+                    test: true,
+                    timestamp: new Date(),
+                    message: 'Firebase connection test'
+                };
+                
+                const docRef = await window.addDoc(window.collection(window.db, 'registrasi'), testData);
+                console.log('Test document written with ID:', docRef.id);
+                
+                const querySnapshot = await window.getDocs(window.collection(window.db, 'registrasi'));
+                console.log('Read test successful, documents found:', querySnapshot.size);
+                
+                showAlert('✅ Firebase connection successful! Rules are working correctly.', 'success');
+                
+            } catch (error) {
+                console.error('Firebase test error:', error);
+                
+                let errorMessage = '❌ Firebase connection failed: ';
+                if (error.code === 'permission-denied') {
+                    errorMessage += 'Permission denied. Update Firebase Rules.';
+                } else if (error.code === 'unavailable') {
+                    errorMessage += 'Service unavailable. Check internet connection.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showAlert(errorMessage, 'danger');
+            }
+        }
+
+        // ========== UTILITIES ==========
+        
+        function showAlert(message, type = 'success') {
+            document.querySelectorAll('.mobile-alert').forEach(el => el.remove());
+            
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} mobile-alert`;
+            
+            let iconClass = 'check-circle';
+            if (type === 'danger') iconClass = 'exclamation-triangle';
+            else if (type === 'warning') iconClass = 'exclamation-circle';
+            else if (type === 'info') iconClass = 'info-circle';
+            
+            alertDiv.innerHTML = `
+                <div style="display: flex; align-items: center;">
+                    <i class="fas fa-${iconClass} me-2"></i>
+                    <span style="flex: 1;">${message}</span>
+                    <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
+                </div>
+            `;
+            document.getElementById('alertContainer').appendChild(alertDiv);
+            
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.remove();
+                }
+            }, 6000);
         }
         
         function scrollToTop() {
@@ -1054,25 +1137,16 @@
                 behavior: 'smooth'
             });
         }
+
+        // ========== INITIALIZATION ==========
         
-        window.loadData = loadData;
-        window.scrollToTop = scrollToTop;
-        
-        // Check authentication on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            console.log('Page loaded, checking authentication...');
             checkAuth();
         });
 
-        // Add haptic feedback
-        function addHapticFeedback() {
-            if ('vibrate' in navigator) {
-                navigator.vibrate(50);
-            }
-        }
-        
-        document.querySelectorAll('.mobile-btn, .mobile-nav-item, .fab, .login-btn').forEach(element => {
-            element.addEventListener('click', addHapticFeedback);
-        });
+        console.log('JavaScript loaded successfully');
     </script>
 </body>
 </html>
