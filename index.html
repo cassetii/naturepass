@@ -1064,6 +1064,14 @@
             }
         }
 
+        function forceAutoFill() {
+            if (autoFillPetugasLoket()) {
+                showAlert('✅ Nama petugas loket berhasil diisi: ' + currentUser.username, 'success');
+            } else {
+                showAlert('❌ Gagal auto-fill. User: ' + (currentUser?.username || 'tidak ada'), 'warning');
+            }
+        }
+
         // ========== FIREBASE TEST ==========
         
         async function testFirebaseConnection() {
