@@ -917,9 +917,16 @@
             
             const alertDiv = document.createElement('div');
             alertDiv.className = `alert alert-${type} mobile-alert`;
+            
+            // Handle different alert types
+            let iconClass = 'check-circle';
+            if (type === 'danger') iconClass = 'exclamation-triangle';
+            else if (type === 'warning') iconClass = 'exclamation-circle';
+            else if (type === 'info') iconClass = 'info-circle';
+            
             alertDiv.innerHTML = `
                 <div style="display: flex; align-items: center;">
-                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                    <i class="fas fa-${iconClass} me-2"></i>
                     <span style="flex: 1;">${message}</span>
                     <button type="button" class="btn-close" onclick="this.parentElement.parentElement.remove()"></button>
                 </div>
@@ -930,7 +937,7 @@
                 if (alertDiv.parentNode) {
                     alertDiv.remove();
                 }
-            }, 4000);
+            }, 6000);
         }
         
         // Submit form
